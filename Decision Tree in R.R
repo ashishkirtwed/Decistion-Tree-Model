@@ -68,7 +68,7 @@ points(set, pch = 21, bg = ifelse(set[, 3] == 1, 'green4', 'red3'))
 
 #Visualizing the Test set results
 library('ElemStatLearn')
-set = training_set
+set = test_set
 #Generating x1 and x2 sequence for min()-max() and x2 sequence
 # min()-max()
 x1 = seq(min(set[,1])-1,max(set[,1])+1,by = 0.01)
@@ -79,7 +79,7 @@ colnames(grid_set) = c('Age','EstimatedSalary')
 y_grid = predict(classifier,newdata=grid_set,type="class")
 #https://www.datamentor.io/r-programming/plot-function/
 plot(set[, -3],
-     main = 'Decision Tree Classification (Training set)',
+     main = 'Decision Tree Classification (Test set)',
      xlab = 'Age', ylab = 'Estimated Salary',
      xlim = range(x1), ylim = range(x2))
 
