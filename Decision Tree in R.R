@@ -66,4 +66,27 @@ points(grid_set, pch = '.', col = ifelse(y_grid == 1, 'springgreen3', 'tomato'))
 
 points(set, pch = 21, bg = ifelse(set[, 3] == 1, 'green4', 'red3'))
 
+#Visualizing the Test set results
+library('ElemStatLearn')
+set = training_set
+#Generating x1 and x2 sequence for min()-max() and x2 sequence
+# min()-max()
+x1 = seq(min(set[,1])-1,max(set[,1])+1,by = 0.01)
+x2 = seq(min(set[,2])-1,max(set[,2])+1,by=0.01)
+#Now making a grid matrix
+grid_set = expand.grid(x1,x2)
+colnames(grid_set) = c('Age','EstimatedSalary')
+y_grid = predict(classifier,newdata=grid_set,type="class")
+#https://www.datamentor.io/r-programming/plot-function/
+plot(set[, -3],
+     main = 'Decision Tree Classification (Training set)',
+     xlab = 'Age', ylab = 'Estimated Salary',
+     xlim = range(x1), ylim = range(x2))
+
+contour(x1, x2, matrix(as.numeric(y_grid), length(x1), length(x2)), add = TRUE)
+
+points(grid_set, pch = '.', col = ifelse(y_grid == 1, 'springgreen3', 'tomato'))
+
+points(set, pch = 21, bg = ifelse(set[, 3] == 1, 'green4', 'red3'))
+
 
